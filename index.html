@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Rogers | Anthropic Australia GTM Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --anthropic-dark: #1a1a2e;
+            --anthropic-navy: #16213e;
+            --anthropic-teal: #0f9690;
+            --anthropic-teal-light: #14b8b0;
+            --anthropic-amber: #d4983d;
+            --anthropic-amber-light: #e8a948;
+            --anthropic-cream: #f8f6f1;
+            --anthropic-warm: #faf8f5;
+            --anthropic-text: #2d2d3a;
+            --anthropic-text-light: #6b6b7b;
+            --anthropic-border: #e8e4df;
+            --anthropic-coral: #d97757;
+            --section-padding: 100px 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--anthropic-text);
+            background: var(--anthropic-warm);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--anthropic-teal-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--anthropic-teal-light);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0d2137 70%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 900px;
+            height: 900px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(15, 150, 144, 0.12) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 152, 61, 0.08) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(15, 150, 144, 0.15);
+            border: 1px solid rgba(15, 150, 144, 0.3);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--anthropic-teal-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(42px, 6vw, 72px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--anthropic-teal-light), var(--anthropic-amber-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.6);
+            max-width: 620px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--anthropic-amber-light);
+            letter-spacing: -1px;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .hero-scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: rgba(255,255,255,0.3);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: var(--section-padding);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--anthropic-teal);
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--anthropic-teal);
+        }
+
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--anthropic-dark);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--anthropic-text-light);
+            max-width: 640px;
+            line-height: 1.7;
+        }
+
+        /* ===== MARKET OVERVIEW ===== */
+        .market-section {
+            background: white;
+        }
+
+        .market-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            margin-bottom: 48px;
+        }
+
+        .market-stat-card {
+            background: var(--anthropic-dark);
+            border-radius: 16px;
+            padding: 36px 32px;
+            text-align: center;
+        }
+
+        .market-stat-card .value {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--anthropic-amber-light);
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .market-stat-card .label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+        }
+
+        .market-insight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .market-insight-card {
+            border: 1px solid var(--anthropic-border);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .market-insight-card:hover {
+            border-color: var(--anthropic-teal);
+            box-shadow: 0 8px 32px rgba(15, 150, 144, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .market-insight-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--anthropic-teal);
+        }
+
+        .market-insight-card p {
+            color: var(--anthropic-text-light);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ===== VERTICALS ===== */
+        .verticals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .vertical-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--anthropic-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vertical-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .vertical-card-header {
+            padding: 32px 28px 20px;
+            position: relative;
+        }
+
+        .vertical-card:nth-child(1) .vertical-card-header {
+            border-top: 4px solid var(--anthropic-teal);
+        }
+
+        .vertical-card:nth-child(2) .vertical-card-header {
+            border-top: 4px solid var(--anthropic-amber);
+        }
+
+        .vertical-card:nth-child(3) .vertical-card-header {
+            border-top: 4px solid var(--anthropic-coral);
+        }
+
+        .vertical-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .vertical-card:nth-child(1) .vertical-icon { background: rgba(15, 150, 144, 0.1); }
+        .vertical-card:nth-child(2) .vertical-icon { background: rgba(212, 152, 61, 0.1); }
+        .vertical-card:nth-child(3) .vertical-icon { background: rgba(217, 119, 87, 0.1); }
+
+        .vertical-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .vertical-card .vertical-subtitle {
+            font-size: 13px;
+            color: var(--anthropic-text-light);
+            font-weight: 500;
+        }
+
+        .vertical-card-body {
+            padding: 0 28px 28px;
+        }
+
+        .vertical-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .vertical-metric {
+            padding: 14px 16px;
+            background: var(--anthropic-warm);
+            border-radius: 10px;
+        }
+
+        .vertical-metric .metric-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--anthropic-text-light);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .vertical-metric .metric-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--anthropic-dark);
+        }
+
+        .vertical-reasons {
+            list-style: none;
+        }
+
+        .vertical-reasons li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--anthropic-text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .vertical-reasons li::before {
+            content: '';
+            min-width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 7px;
+        }
+
+        .vertical-card:nth-child(1) .vertical-reasons li::before { background: var(--anthropic-teal); }
+        .vertical-card:nth-child(2) .vertical-reasons li::before { background: var(--anthropic-amber); }
+        .vertical-card:nth-child(3) .vertical-reasons li::before { background: var(--anthropic-coral); }
+
+        .vertical-accounts {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--anthropic-border);
+            font-size: 13px;
+            color: var(--anthropic-text-light);
+        }
+
+        .vertical-accounts strong {
+            color: var(--anthropic-text);
+        }
+
+        /* ===== DIFFERENTIATION ===== */
+        .diff-section {
+            background: var(--anthropic-dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diff-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--anthropic-teal), transparent);
+        }
+
+        .diff-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-style: italic;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 64px;
+            text-align: center;
+            padding: 40px;
+            border-left: 3px solid var(--anthropic-teal);
+            border-right: 3px solid var(--anthropic-teal);
+            background: rgba(15, 150, 144, 0.05);
+            border-radius: 8px;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .diff-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all 0.3s ease;
+        }
+
+        .diff-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(15, 150, 144, 0.3);
+        }
+
+        .diff-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .diff-card:nth-child(1) .diff-card-icon { background: rgba(15, 150, 144, 0.2); }
+        .diff-card:nth-child(2) .diff-card-icon { background: rgba(212, 152, 61, 0.2); }
+        .diff-card:nth-child(3) .diff-card-icon { background: rgba(15, 150, 144, 0.2); }
+        .diff-card:nth-child(4) .diff-card-icon { background: rgba(212, 152, 61, 0.2); }
+
+        .diff-card h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--anthropic-teal-light);
+        }
+
+        .diff-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        /* ===== SOLUTIONS ===== */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 20px;
+            padding: 36px;
+            border: 1px solid var(--anthropic-border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card:hover {
+            border-color: var(--anthropic-teal);
+            box-shadow: 0 12px 40px rgba(15, 150, 144, 0.08);
+        }
+
+        .solution-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .solution-badge.primary { background: rgba(15, 150, 144, 0.12); color: var(--anthropic-teal); }
+        .solution-badge.custom { background: rgba(26, 26, 46, 0.08); color: var(--anthropic-dark); }
+        .solution-badge.enterprise { background: rgba(212, 152, 61, 0.12); color: var(--anthropic-amber); }
+        .solution-badge.preview { background: rgba(217, 119, 87, 0.12); color: var(--anthropic-coral); }
+
+        .solution-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .solution-card .solution-desc {
+            font-size: 14px;
+            color: var(--anthropic-text-light);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .solution-card p {
+            font-size: 15px;
+            color: var(--anthropic-text-light);
+            line-height: 1.7;
+        }
+
+        .solution-stat {
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--anthropic-dark);
+            border-radius: 10px;
+            color: var(--anthropic-amber-light);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .solution-stat .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+        }
+
+        /* ===== USE CASES ===== */
+        .usecases-section {
+            background: white;
+        }
+
+        .usecase-cross {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 40px 0;
+        }
+
+        .usecase-cross-item {
+            padding: 20px 24px;
+            background: var(--anthropic-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .usecase-cross-item .dot {
+            min-width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--anthropic-teal-light);
+        }
+
+        .usecase-cross-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .usecase-cross-item p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .usecase-verticals {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .usecase-vertical-col h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+        }
+
+        .usecase-vertical-col:nth-child(1) h3 { border-bottom: 3px solid var(--anthropic-teal); color: var(--anthropic-teal); }
+        .usecase-vertical-col:nth-child(2) h3 { border-bottom: 3px solid var(--anthropic-coral); color: var(--anthropic-coral); }
+        .usecase-vertical-col:nth-child(3) h3 { border-bottom: 3px solid var(--anthropic-amber); color: var(--anthropic-amber); }
+
+        .usecase-item {
+            padding: 20px;
+            background: var(--anthropic-warm);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .usecase-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--anthropic-dark);
+        }
+
+        .usecase-item p {
+            font-size: 13px;
+            color: var(--anthropic-text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== PIPELINE ===== */
+        .pipeline-section {
+            background: var(--anthropic-warm);
+        }
+
+        .pipeline-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .tier-card {
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tier-header {
+            padding: 16px 24px;
+            font-weight: 700;
+            font-size: 15px;
+            color: white;
+        }
+
+        .tier-card:nth-child(1) .tier-header { background: var(--anthropic-teal); }
+        .tier-card:nth-child(2) .tier-header { background: #2a8a86; }
+        .tier-card:nth-child(3) .tier-header { background: #4a7a78; }
+        .tier-card:nth-child(4) .tier-header { background: #6a8a88; }
+
+        .tier-body {
+            padding: 16px 24px;
+            background: white;
+            border: 1px solid var(--anthropic-border);
+            border-top: 0;
+            border-radius: 0 0 12px 12px;
+            font-size: 14px;
+            color: var(--anthropic-text-light);
+            line-height: 1.6;
+        }
+
+        .enrichment-steps {
+            list-style: none;
+        }
+
+        .enrichment-steps li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--anthropic-border);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .enrichment-steps li:last-child { border-bottom: none; }
+
+        .enrichment-step-num {
+            min-width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--anthropic-teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .enrichment-step-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--anthropic-dark);
+            margin-bottom: 2px;
+        }
+
+        .enrichment-step-content p {
+            font-size: 13px;
+            color: var(--anthropic-text-light);
+            line-height: 1.5;
+        }
+
+        /* ===== FLYWHEEL ===== */
+        .flywheel-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            margin-bottom: 64px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .flywheel-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .flywheel-svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .flywheel-ring {
+            fill: none;
+            stroke: rgba(15, 150, 144, 0.15);
+            stroke-width: 36;
+        }
+
+        .flywheel-ring-progress {
+            fill: none;
+            stroke: url(#flywheel-gradient);
+            stroke-width: 36;
+            stroke-linecap: round;
+            stroke-dasharray: 1068;
+            stroke-dashoffset: 50;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+
+        .flywheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 140px;
+        }
+
+        .flywheel-center-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 600;
+        }
+
+        .flywheel-center-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-top: 4px;
+        }
+
+        .flywheel-node {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .flywheel-node-1 { background: var(--anthropic-teal); top: 2%; left: 50%; transform: translateX(-50%); }
+        .flywheel-node-2 { background: var(--anthropic-teal); top: 24%; right: 4%; }
+        .flywheel-node-3 { background: var(--anthropic-amber); bottom: 14%; right: 12%; }
+        .flywheel-node-4 { background: var(--anthropic-amber); bottom: 14%; left: 12%; }
+        .flywheel-node-5 { background: #a78bfa; top: 24%; left: 4%; }
+
+        .flywheel-label {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .flywheel-label-1 { top: -6%; left: 50%; transform: translateX(-50%); color: var(--anthropic-teal-light); }
+        .flywheel-label-2 { top: 20%; right: -18%; color: var(--anthropic-teal-light); }
+        .flywheel-label-3 { bottom: 6%; right: -10%; color: var(--anthropic-amber-light); }
+        .flywheel-label-4 { bottom: 6%; left: -16%; color: var(--anthropic-amber-light); }
+        .flywheel-label-5 { top: 20%; left: -20%; color: #a78bfa; }
+
+        .flywheel-steps {
+            list-style: none;
+        }
+
+        .flywheel-step {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .flywheel-step:last-child {
+            border-bottom: none;
+        }
+
+        .flywheel-step-num {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .flywheel-step:nth-child(1) .flywheel-step-num { background: var(--anthropic-teal); }
+        .flywheel-step:nth-child(2) .flywheel-step-num { background: var(--anthropic-teal); }
+        .flywheel-step:nth-child(3) .flywheel-step-num { background: var(--anthropic-amber); }
+        .flywheel-step:nth-child(4) .flywheel-step-num { background: var(--anthropic-amber); }
+        .flywheel-step:nth-child(5) .flywheel-step-num { background: #a78bfa; }
+
+        .flywheel-step h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .flywheel-step:nth-child(1) h4 { color: var(--anthropic-teal-light); }
+        .flywheel-step:nth-child(2) h4 { color: var(--anthropic-teal-light); }
+        .flywheel-step:nth-child(3) h4 { color: var(--anthropic-amber-light); }
+        .flywheel-step:nth-child(4) h4 { color: var(--anthropic-amber-light); }
+        .flywheel-step:nth-child(5) h4 { color: #a78bfa; }
+
+        .flywheel-step .step-tag {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .flywheel-step p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .flywheel-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .flywheel-container { max-width: 320px; }
+            .flywheel-label { display: none; }
+        }
+
+        /* ===== MACQUARIE ===== */
+        .macquarie-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+
+        .mq-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 48px 0;
+        }
+
+        .mq-stat {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .mq-stat .value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--anthropic-amber-light);
+            letter-spacing: -1px;
+        }
+
+        .mq-stat .label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            margin-top: 4px;
+        }
+
+        .mq-groups {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .mq-group-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border-radius: 14px;
+            transition: all 0.3s;
+        }
+
+        .mq-group-link:hover .mq-group {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--anthropic-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(15, 150, 144, 0.12);
+        }
+
+        .mq-group-link:hover h4 {
+            color: var(--anthropic-teal-light);
+        }
+
+        .mq-group {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .mq-group h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .mq-group p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+            max-width: 280px;
+        }
+
+        .mq-group .revenue {
+            text-align: right;
+        }
+
+        .mq-group .revenue .amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--anthropic-teal-light);
+        }
+
+        .mq-group .revenue .change {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mq-group .revenue .change.up { color: #4ade80; }
+        .mq-group .revenue .change.down { color: #f87171; }
+        .mq-group .revenue .change.flat { color: rgba(255,255,255,0.4); }
+
+        /* ===== OPPORTUNITY ===== */
+        .opportunity-banner {
+            background: linear-gradient(135deg, var(--anthropic-teal), #0a7a75);
+            border-radius: 20px;
+            padding: 48px;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        .opportunity-banner .opp-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .opportunity-banner .opp-value {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -2px;
+        }
+
+        /* ===== STRATEGY PHASES ===== */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 48px;
+        }
+
+        .phase-card {
+            display: grid;
+            grid-template-columns: 80px 240px 1fr;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .phase-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(15, 150, 144, 0.3);
+        }
+
+        .phase-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            padding: 24px;
+        }
+
+        .phase-card:nth-child(1) .phase-num,
+        .phase-card:nth-child(2) .phase-num { color: var(--anthropic-teal-light); }
+        .phase-card:nth-child(3) .phase-num { color: var(--anthropic-amber-light); }
+        .phase-card:nth-child(4) .phase-num { color: #a78bfa; }
+        .phase-card:nth-child(5) .phase-num { color: var(--anthropic-teal-light); }
+        .phase-card:nth-child(6) .phase-num { color: var(--anthropic-amber-light); }
+        .phase-card:nth-child(7) .phase-num { color: var(--anthropic-coral); }
+        .phase-card:nth-child(8) .phase-num { color: #a78bfa; }
+
+        .phase-title {
+            display: flex;
+            align-items: center;
+            padding: 24px 0;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .phase-card:nth-child(1) .phase-title,
+        .phase-card:nth-child(2) .phase-title { color: var(--anthropic-teal-light); }
+        .phase-card:nth-child(3) .phase-title { color: var(--anthropic-amber-light); }
+        .phase-card:nth-child(4) .phase-title { color: #a78bfa; }
+        .phase-card:nth-child(5) .phase-title { color: var(--anthropic-teal-light); }
+        .phase-card:nth-child(6) .phase-title { color: var(--anthropic-amber-light); }
+        .phase-card:nth-child(7) .phase-title { color: var(--anthropic-coral); }
+        .phase-card:nth-child(8) .phase-title { color: #a78bfa; }
+
+        .phase-desc {
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.6;
+            border-left: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* ===== STAKEHOLDERS ===== */
+        .stakeholder-section {
+            background: white;
+        }
+
+        .stakeholder-org {
+            margin-top: 48px;
+        }
+
+        .stakeholder-tier {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .stakeholder-card {
+            background: var(--anthropic-warm);
+            border: 1px solid var(--anthropic-border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            text-align: center;
+            transition: all 0.3s;
+            min-width: 180px;
+        }
+
+        .stakeholder-card:hover {
+            border-color: var(--anthropic-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .stakeholder-card.ceo {
+            background: var(--anthropic-dark);
+            border-color: var(--anthropic-amber);
+        }
+
+        .stakeholder-card.ceo .name { color: var(--anthropic-amber-light); }
+        .stakeholder-card.ceo .role { color: rgba(255,255,255,0.6); }
+
+        .stakeholder-card.exec {
+            background: rgba(15, 150, 144, 0.06);
+            border-color: var(--anthropic-teal);
+        }
+
+        .stakeholder-card .name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--anthropic-dark);
+            margin-bottom: 2px;
+        }
+
+        .stakeholder-card .role {
+            font-size: 12px;
+            color: var(--anthropic-text-light);
+        }
+
+        a.stakeholder-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            min-width: 180px;
+        }
+
+        a.stakeholder-link .stakeholder-card {
+            cursor: pointer;
+        }
+
+        a.stakeholder-link:hover .stakeholder-card {
+            border-color: var(--anthropic-teal);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        a.stakeholder-link:hover .stakeholder-card .name {
+            color: var(--anthropic-teal);
+        }
+
+        a.stakeholder-link:hover .stakeholder-card.ceo .name {
+            color: var(--anthropic-teal-light);
+        }
+
+        a.stakeholder-link:hover .stakeholder-card.exec .name {
+            color: var(--anthropic-teal);
+        }
+
+        .stakeholder-connector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .stakeholder-connector .line {
+            width: 2px;
+            height: 24px;
+            background: var(--anthropic-border);
+        }
+
+        /* ===== ASKS ===== */
+        .asks-section {
+            background: var(--anthropic-warm);
+        }
+
+        .asks-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .ask-card {
+            display: flex;
+            gap: 20px;
+            padding: 28px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--anthropic-border);
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .ask-card:hover {
+            border-color: var(--anthropic-teal);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+        }
+
+        .ask-num {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--anthropic-teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .ask-content h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--anthropic-dark);
+            margin-bottom: 6px;
+        }
+
+        .ask-content p {
+            font-size: 14px;
+            color: var(--anthropic-text-light);
+            line-height: 1.6;
+        }
+
+        .investment-case {
+            background: var(--anthropic-dark);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .investment-case h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--anthropic-teal-light);
+            margin-bottom: 24px;
+        }
+
+        .investment-case li {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+            list-style: none;
+        }
+
+        .investment-case li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--anthropic-amber-light);
+        }
+
+        /* ===== FOOTER CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--anthropic-dark) 0%, #0d2137 100%);
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--anthropic-teal), transparent);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.55);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--anthropic-teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--anthropic-teal-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 150, 144, 0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #111122;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ===== EVENTS ===== */
+        .events-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .event-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 100px;
+            background: white;
+            border: 1px solid var(--anthropic-border);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--anthropic-dark);
+        }
+
+        .event-chip .event-type {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .event-type.partner { background: var(--anthropic-teal); color: white; }
+        .event-type.industry { background: var(--anthropic-amber); color: white; }
+        .event-type.vertical { background: var(--anthropic-dark); color: white; }
+        .event-type.community { background: var(--anthropic-coral); color: white; }
+
+        /* ===== ANIMATIONS ===== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .verticals-grid,
+            .usecase-cross,
+            .usecase-verticals {
+                grid-template-columns: 1fr;
+            }
+            .mq-stats-row { grid-template-columns: repeat(2, 1fr); }
+            .solutions-grid { grid-template-columns: 1fr; }
+            .pipeline-layout { grid-template-columns: 1fr; }
+            .asks-layout { grid-template-columns: 1fr; }
+            .diff-grid { grid-template-columns: 1fr; }
+            .market-insight-grid { grid-template-columns: 1fr; }
+            .phase-card { grid-template-columns: 60px 180px 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --section-padding: 64px 0; }
+            .container { padding: 0 24px; }
+            .hero-content { padding: 100px 24px 60px; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .market-hero-stats { grid-template-columns: 1fr; }
+            .mq-stats-row { grid-template-columns: 1fr; }
+            .mq-groups { grid-template-columns: 1fr; }
+            .phase-card { grid-template-columns: 1fr; }
+            .phase-num { justify-content: flex-start; padding: 20px 24px 0; }
+            .phase-title { padding: 8px 24px 0; }
+            .phase-desc { border-left: none; padding: 8px 24px 20px; }
+            .stakeholder-tier { flex-direction: column; align-items: center; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .events-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">James <span>Rogers</span></a>
+            <ul class="nav-links">
+                <li><a href="#market">Market</a></li>
+                <li><a href="#verticals">Verticals</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#pipeline">Pipeline</a></li>
+                <li><a href="#macquarie">Macquarie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Assignment Review &middot; February 2026</div>
+            <h1>Anthropic Australia<br><span class="highlight">Go-To-Market Strategy</span></h1>
+            <p class="hero-subtitle">A comprehensive enterprise strategy for deploying Claude across Australia's highest-value verticals. Built with deep market knowledge and genuine respect for Anthropic's mission.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">$4.5T</div>
+                    <div class="hero-stat-label">Australian Market</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">3</div>
+                    <div class="hero-stat-label">Target Verticals</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">$5-10M</div>
+                    <div class="hero-stat-label">Macquarie ARR Opportunity</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- Market Overview -->
+    <section class="section market-section" id="market">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Australian Market</div>
+                <h2 class="section-title">The Two-Speed Economy</h2>
+                <p class="section-subtitle">Australia's economy runs on two engines &mdash; Financial Services and Mining. Together they create a natural revenue hedge that future-proofs Anthropic's Australian revenue across macro cycles.</p>
+            </div>
+
+            <div class="market-hero-stats animate-on-scroll">
+                <div class="market-stat-card">
+                    <div class="value">$4.5T</div>
+                    <div class="label">Total Australian Market Revenue</div>
+                </div>
+                <div class="market-stat-card">
+                    <div class="value">0.2%</div>
+                    <div class="label">of Businesses Drive ~50% of Revenue</div>
+                </div>
+                <div class="market-stat-card">
+                    <div class="value">2.6%</div>
+                    <div class="label">Market Growth 2024 &rarr; 2025</div>
+                </div>
+            </div>
+
+            <div class="market-insight-grid animate-on-scroll">
+                <div class="market-insight-card">
+                    <h3>Enterprise = The Only Prize</h3>
+                    <p>The top 0.2% of Australian businesses generate approximately half of all revenue. Enterprise wins don't just contribute &mdash; they define the market. Anthropic must earn its place in the C-suite of Australia's largest organisations.</p>
+                </div>
+                <div class="market-insight-card">
+                    <h3>Health & Life Sciences: Third Engine</h3>
+                    <p>Australia ranks in the global top 10 for pharmaceutical launches. With $6.4bn in government investment over 13 years, this sector operates on entirely different economic cycles &mdash; providing a non-correlated revenue stream.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verticals -->
+    <section class="section" id="verticals">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Priority Verticals</div>
+                <h2 class="section-title">Three Verticals, One Strategy</h2>
+                <p class="section-subtitle">Each vertical has distinct drivers, regulators and adoption patterns &mdash; creating multiple pathways for Anthropic to capture enterprise revenue in Australia.</p>
+            </div>
+
+            <div class="verticals-grid">
+                <!-- FSI -->
+                <div class="vertical-card animate-on-scroll">
+                    <div class="vertical-card-header">
+                        <div class="vertical-icon">&#9878;</div>
+                        <h3>Financial Services</h3>
+                        <div class="vertical-subtitle">& Insurance</div>
+                    </div>
+                    <div class="vertical-card-body">
+                        <div class="vertical-metrics">
+                            <div class="vertical-metric">
+                                <div class="metric-label">Revenue (2025)</div>
+                                <div class="metric-value">$450-550B</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Growth</div>
+                                <div class="metric-value">5.6% YoY</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Tech Spend</div>
+                                <div class="metric-value">$2.3Bn+</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Regulator</div>
+                                <div class="metric-value">APRA</div>
+                            </div>
+                        </div>
+                        <ul class="vertical-reasons">
+                            <li>APRA requires traceable, auditable AI &mdash; Claude's interpretability is a compliance necessity</li>
+                            <li>CBA implemented Claude with AWS, accelerating deployment by 2&times;</li>
+                            <li>CBA alone has ~12,000 tech staff &mdash; massive Claude Code opportunity</li>
+                        </ul>
+                        <div class="vertical-accounts"><strong>Key Accounts:</strong> CBA &middot; NAB &middot; ANZ &middot; Westpac &middot; Macquarie</div>
+                    </div>
+                </div>
+
+                <!-- Mining -->
+                <div class="vertical-card animate-on-scroll">
+                    <div class="vertical-card-header">
+                        <div class="vertical-icon">&#9874;</div>
+                        <h3>Mining</h3>
+                        <div class="vertical-subtitle">Resources & Energy</div>
+                    </div>
+                    <div class="vertical-card-body">
+                        <div class="vertical-metrics">
+                            <div class="vertical-metric">
+                                <div class="metric-label">Revenue (2025)</div>
+                                <div class="metric-value">$500-700B</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">EBITDA</div>
+                                <div class="metric-value">-15% YoY</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">AI Driver</div>
+                                <div class="metric-value">Cost Reduction</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Proof Point</div>
+                                <div class="metric-value">BHP -70% loss</div>
+                            </div>
+                        </div>
+                        <ul class="vertical-reasons">
+                            <li>EBITDA down 15% YoY creates urgency for technology-driven efficiency gains</li>
+                            <li>Safety reporting automation &mdash; every incident needs documented root cause analysis</li>
+                            <li>Environmental compliance &mdash; massive permit workloads with clear AI ROI</li>
+                        </ul>
+                        <div class="vertical-accounts"><strong>Key Accounts:</strong> BHP &middot; Rio Tinto &middot; Fortescue</div>
+                    </div>
+                </div>
+
+                <!-- HLS -->
+                <div class="vertical-card animate-on-scroll">
+                    <div class="vertical-card-header">
+                        <div class="vertical-icon">&#9764;</div>
+                        <h3>Health & Life Sciences</h3>
+                        <div class="vertical-subtitle">Pharma & MedTech</div>
+                    </div>
+                    <div class="vertical-card-body">
+                        <div class="vertical-metrics">
+                            <div class="vertical-metric">
+                                <div class="metric-label">Revenue (2025)</div>
+                                <div class="metric-value">$217B</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Growth</div>
+                                <div class="metric-value">12-13% YoY</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Gov. Investment</div>
+                                <div class="metric-value">$6.4Bn</div>
+                            </div>
+                            <div class="vertical-metric">
+                                <div class="metric-label">Global Proof</div>
+                                <div class="metric-value">95% faster</div>
+                            </div>
+                        </div>
+                        <ul class="vertical-reasons">
+                            <li>Fastest-growing vertical with 12-13% YoY growth and government-backed investment</li>
+                            <li>Novo Nordisk achieved 95% reduction in clinical documentation time</li>
+                            <li>Non-correlated economic cycle provides revenue stability</li>
+                        </ul>
+                        <div class="vertical-accounts"><strong>Key Accounts:</strong> CSL &middot; Cochlear &middot; ResMed &middot; Sonic Healthcare</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiation -->
+    <section class="section diff-section">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label" style="color: var(--anthropic-teal-light)">Why Anthropic Wins</div>
+                <h2 class="section-title" style="color: white">The Differentiation Thesis</h2>
+            </div>
+
+            <div class="diff-quote animate-on-scroll">
+                Safety, reliability, interpretability and steerability are not compliance costs &mdash; they are commercial advantages in regulated industries.
+            </div>
+
+            <div class="diff-grid animate-on-scroll">
+                <div class="diff-card">
+                    <div class="diff-card-icon">&#9878;</div>
+                    <h3>Regulatory Alignment</h3>
+                    <p>APRA mandates auditable AI for FSI. TGA governs Life Sciences outputs. NSW Resources Regulator oversees Mining safety. Anthropic's interpretable systems are the only enterprise-safe choice across all three verticals.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-card-icon">&#9729;</div>
+                    <h3>Multi-Cloud Strategy</h3>
+                    <p>Claude available via AWS Bedrock and GCP Vertex AI. Customers deploy behind their own SSO, security controls and pre-compliant infrastructure &mdash; reducing friction from procurement and security teams.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-card-icon">&#9000;</div>
+                    <h3>Claude Code Leadership</h3>
+                    <p>Opus 4.5 tops all coding benchmarks at 80.9%. CBA (12K), BHP (2K) and CSL (2K R&D) are vast engineering organisations &mdash; Claude Code represents an immediate, measurable productivity unlock.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-card-icon">&#10003;</div>
+                    <h3>Proven Enterprise References</h3>
+                    <p>CBA (2&times; deployment acceleration with AWS), Novo Nordisk (95% docs reduction), Citi, Moody's, Block (75% of engineers saving 8-10hrs/week).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section class="section" id="solutions">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Solutions Portfolio</div>
+                <h2 class="section-title">Anthropic Solutions for Australia</h2>
+                <p class="section-subtitle">Four products, each mapped to specific enterprise buyer personas and use cases across the Australian market.</p>
+            </div>
+
+            <div class="solutions-grid">
+                <div class="solution-card animate-on-scroll">
+                    <span class="solution-badge primary">Primary Entry Point</span>
+                    <h3>Claude Code</h3>
+                    <p class="solution-desc">AI coding assistant that accelerates software development across all verticals.</p>
+                    <p>Every enterprise has engineering teams. Claude Code delivers immediate, measurable time savings. The natural entry point into technical stakeholders with the highest willingness to adopt.</p>
+                    <div class="solution-stat">80.9% <span class="stat-label">Opus 4.5 benchmark</span></div>
+                </div>
+                <div class="solution-card animate-on-scroll">
+                    <span class="solution-badge custom">Custom Workflows</span>
+                    <h3>Claude API</h3>
+                    <p class="solution-desc">Direct API access for building custom AI workflows and integrations.</p>
+                    <p>Enables teams to build proprietary applications connecting Claude to internal data warehouses, systems and tools. Highest flexibility, highest technical value.</p>
+                    <div class="solution-stat">21% <span class="stat-label">of Claude usage = developers</span></div>
+                </div>
+                <div class="solution-card animate-on-scroll">
+                    <span class="solution-badge enterprise">Employee Productivity</span>
+                    <h3>Claude Enterprise</h3>
+                    <p class="solution-desc">Enterprise-grade Claude with security controls, SSO and administrative oversight.</p>
+                    <p>Enables safe, traceable AI interactions for non-technical staff. C-suite cannot risk uncontrolled AI &mdash; Claude Enterprise provides the governance layer required for enterprise adoption.</p>
+                    <div class="solution-stat">$12K <span class="stat-label">per 25 employees</span></div>
+                </div>
+                <div class="solution-card animate-on-scroll">
+                    <span class="solution-badge preview">Q1 2026 Preview</span>
+                    <h3>Claude Cowork</h3>
+                    <p class="solution-desc">Desktop automation tool enabling AI-powered task execution across internal systems.</p>
+                    <p>The broadest adoption play &mdash; every employee becomes a user. Target: gate one large domestic enterprise per vertical into the preview in Q1 2026.</p>
+                    <div class="solution-stat">Q1 <span class="stat-label">2026 priority target</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="section usecases-section">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Use Cases</div>
+                <h2 class="section-title">Focused Use Cases by Vertical</h2>
+            </div>
+
+            <div class="usecase-cross animate-on-scroll">
+                <div class="usecase-cross-item">
+                    <div class="dot"></div>
+                    <div>
+                        <h4>Software Development</h4>
+                        <p>Accelerate internal & external app launches</p>
+                    </div>
+                </div>
+                <div class="usecase-cross-item">
+                    <div class="dot"></div>
+                    <div>
+                        <h4>Customer Experience</h4>
+                        <p>Reduce wait times, triage FAQs, automate interactions</p>
+                    </div>
+                </div>
+                <div class="usecase-cross-item">
+                    <div class="dot"></div>
+                    <div>
+                        <h4>Employee Productivity</h4>
+                        <p>Summarise, generate reports, automate responses</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usecase-verticals animate-on-scroll">
+                <div class="usecase-vertical-col">
+                    <h3>Financial Services</h3>
+                    <div class="usecase-item">
+                        <h4>Application Automation</h4>
+                        <p>Loans, credit cards and insurance approvals with minimal human intervention. Processing from days to minutes.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Research & Analysis</h4>
+                        <p>Macro trend analysis, risk flagging, hypothesis modelling and automated client presentation generation.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Data Room Analysis</h4>
+                        <p>Assess entire data rooms and generate queryable reports by connecting to existing data warehouses.</p>
+                    </div>
+                </div>
+                <div class="usecase-vertical-col">
+                    <h3>Health & Life Sciences</h3>
+                    <div class="usecase-item">
+                        <h4>Literature Synthesis</h4>
+                        <p>Rapidly digest vast medical publications and extract the most relevant research artefacts for drug development teams.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Clinical Trial Docs</h4>
+                        <p>High-quality, repeatable regulatory submissions for TGA approval. Novo Nordisk cut documentation time by 95%.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Hypothesis Generation</h4>
+                        <p>Generate and evaluate research hypotheses with high accuracy &mdash; compressing the front-end of R&D cycles.</p>
+                    </div>
+                </div>
+                <div class="usecase-vertical-col">
+                    <h3>Mining</h3>
+                    <div class="usecase-item">
+                        <h4>Safety Incident Reporting</h4>
+                        <p>Every incident requires documented root cause analysis. Automate logs via natural language transcription.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Environmental Compliance</h4>
+                        <p>Accelerate emissions documentation and permit applications. ROI proportional to deposit value.</p>
+                    </div>
+                    <div class="usecase-item">
+                        <h4>Exploration Planning</h4>
+                        <p>Model drilling hypotheses to minimise environmental disruption and maximise yield.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pipeline Strategy -->
+    <section class="section pipeline-section" id="pipeline">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Pipeline Strategy</div>
+                <h2 class="section-title">Account Prioritisation & Outreach</h2>
+                <p class="section-subtitle">A structured approach to building pipeline across tiered accounts, leveraging partner networks and data enrichment.</p>
+            </div>
+
+            <div class="pipeline-layout">
+                <div class="animate-on-scroll">
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Account Tiering Framework</h3>
+                    <div class="tier-card">
+                        <div class="tier-header">P1 &middot; Flagship Accounts</div>
+                        <div class="tier-body">Top FSI and Mining enterprises by revenue. Warm introductions via AWS/GCP partner network. Hyper-personalised outreach referencing annual report AI priorities.</div>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-header">P2 &middot; Strong Alignment</div>
+                        <div class="tier-body">Medium enterprise with existing hyperscaler or partner case study alignment. Used for message testing and cadence refinement before activating P1.</div>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-header">P3 &middot; Broader Market</div>
+                        <div class="tier-body">Wider enterprise pool. Targeted via LinkedIn outreach to Head of AI, CISO, CTO, CIO, CEO, Head of Research, Head of Data.</div>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-header">P4 &middot; Opportunistic</div>
+                        <div class="tier-body">Inbound leads or opportunistic contacts. Maintained with light cadence and recent AI news hooks relevant to their industry.</div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll">
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Data Enrichment & Partner Leverage</h3>
+                    <ul class="enrichment-steps">
+                        <li>
+                            <div class="enrichment-step-num">1</div>
+                            <div class="enrichment-step-content">
+                                <h4>Interrogate Account List</h4>
+                                <p>Hydrate with 2025 revenue, headcount, cloud provider, current tech vendors from IBIS World, LinkedIn and AFR.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="enrichment-step-num">2</div>
+                            <div class="enrichment-step-content">
+                                <h4>Annual Report Research</h4>
+                                <p>Investigate annual reports for direct references to AI strategy, safety priorities and technology investment goals.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="enrichment-step-num">3</div>
+                            <div class="enrichment-step-content">
+                                <h4>Case Study Matching</h4>
+                                <p>Identify existing case studies with AWS, Snowflake, Databricks, Slalom or Accenture to create warm pathways.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="enrichment-step-num">4</div>
+                            <div class="enrichment-step-content">
+                                <h4>Partner Network Activation</h4>
+                                <p>Leverage AWS, GCP, Snowflake and Databricks relationships for warm introductions.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="enrichment-step-num">5</div>
+                            <div class="enrichment-step-content">
+                                <h4>LinkedIn Stakeholder Mapping</h4>
+                                <p>Where no warm path exists, identify key decision-makers via LinkedIn Sales Navigator.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="animate-on-scroll" style="margin-top: 48px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 16px;">Key Events Calendar</h3>
+                <div class="events-row">
+                    <div class="event-chip"><span class="event-type partner">Partner</span> Google Cloud Summit &middot; July 2026</div>
+                    <div class="event-chip"><span class="event-type partner">Partner</span> AWS Summit Sydney &middot; 2026</div>
+                    <div class="event-chip"><span class="event-type industry">Industry</span> AFR AI Live Summit &middot; 2026</div>
+                    <div class="event-chip"><span class="event-type vertical">Vertical</span> Gartner AI in Financial Services &middot; 2026</div>
+                    <div class="event-chip"><span class="event-type community">Community</span> TechHaus &middot; 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Macquarie Section -->
+    <section class="section macquarie-section" id="macquarie">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label" style="color: var(--anthropic-teal-light)">Flagship Account Plan</div>
+                <h2 class="section-title" style="color: white">Macquarie Group</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.5)">Priority Account &middot; FSI Flagship &middot; $5&ndash;10M ARR Opportunity</p>
+            </div>
+
+            <div class="mq-stats-row animate-on-scroll">
+                <div class="mq-stat">
+                    <div class="value">$82B</div>
+                    <div class="label">Market Cap (ASX #8)</div>
+                </div>
+                <div class="mq-stat">
+                    <div class="value">$17.5B</div>
+                    <div class="label">Net Operating Income FY25</div>
+                </div>
+                <div class="mq-stat">
+                    <div class="value">20,600</div>
+                    <div class="label">Global Employees</div>
+                </div>
+                <div class="mq-stat">
+                    <div class="value">6,000+</div>
+                    <div class="label">Technology Team</div>
+                </div>
+            </div>
+
+            <div class="mq-groups animate-on-scroll">
+                <a href="https://www.macquarie.com/au/en/about/company/macquarie-asset-management.html" target="_blank" class="mq-group-link">
+                    <div class="mq-group">
+                        <div>
+                            <h4>Macquarie Asset Management</h4>
+                            <p>Leading global asset manager. $720Bn AUM across 23 global markets.</p>
+                        </div>
+                        <div class="revenue">
+                            <div class="amount">$1.61B</div>
+                            <div class="change up">+33% YoY</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.macquarie.com/au/en/about/company/banking-and-financial-services.html" target="_blank" class="mq-group-link">
+                    <div class="mq-group">
+                        <div>
+                            <h4>Banking & Financial Services</h4>
+                            <p>Digital-first banking. 2.1M clients, $170Bn loan and deposit portfolio.</p>
+                        </div>
+                        <div class="revenue">
+                            <div class="amount">$1.38B</div>
+                            <div class="change up">+11% YoY</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.macquarie.com/au/en/about/company/commodities-and-global-markets.html" target="_blank" class="mq-group-link">
+                    <div class="mq-group">
+                        <div>
+                            <h4>Commodities & Global Markets</h4>
+                            <p>Capital, finance, risk management. Runs on AWS &mdash; direct Bedrock pathway.</p>
+                        </div>
+                        <div class="revenue">
+                            <div class="amount">$2.82B</div>
+                            <div class="change down">-12% YoY</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.macquarie.com/au/en/about/company/macquarie-capital.html" target="_blank" class="mq-group-link">
+                    <div class="mq-group">
+                        <div>
+                            <h4>Macquarie Capital</h4>
+                            <p>#1 ANZ M&A advisor for 10+ years. 1,450 staff across 22 global markets.</p>
+                        </div>
+                        <div class="revenue">
+                            <div class="amount">$1.04B</div>
+                            <div class="change flat">Flat YoY</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Opportunity -->
+            <div class="opportunity-banner animate-on-scroll">
+                <div class="opp-label">Annual Revenue Opportunity</div>
+                <div class="opp-value">$5.0M &ndash; $9.88M ARR</div>
+            </div>
+
+            <!-- Five-Step Account Strategy -->
+            <div class="animate-on-scroll">
+                <h3 style="font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px;">Five-Step Account Strategy</h3>
+                <p style="font-size: 15px; color: rgba(255,255,255,0.45); font-style: italic; margin-bottom: 0;">Strict with the vision, flexible with the approach. Work through hypotheses and pivot when a better technique is available.</p>
+            </div>
+
+            <div class="flywheel-wrapper animate-on-scroll">
+                <!-- Flywheel Visual -->
+                <div class="flywheel-container">
+                    <svg class="flywheel-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="flywheel-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0f9690;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#14b8b0;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#d4983d;stop-opacity:1" />
+                                <stop offset="80%" style="stop-color:#e8a948;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="200" r="155" class="flywheel-ring" />
+                        <circle cx="200" cy="200" r="155" class="flywheel-ring-progress" />
+                    </svg>
+                    <!-- Center Text -->
+                    <div class="flywheel-center">
+                        <div class="flywheel-center-label">Strategy</div>
+                        <div class="flywheel-center-text">Macquarie<br>Flywheel</div>
+                    </div>
+                    <!-- Nodes -->
+                    <div class="flywheel-node flywheel-node-1">1</div>
+                    <div class="flywheel-node flywheel-node-2">2</div>
+                    <div class="flywheel-node flywheel-node-3">3</div>
+                    <div class="flywheel-node flywheel-node-4">4</div>
+                    <div class="flywheel-node flywheel-node-5">5</div>
+                    <!-- Labels -->
+                    <div class="flywheel-label flywheel-label-1">Lead with Risk</div>
+                    <div class="flywheel-label flywheel-label-2">Leverage Network</div>
+                    <div class="flywheel-label flywheel-label-3">Land with Tech</div>
+                    <div class="flywheel-label flywheel-label-4">Lean into Business</div>
+                    <div class="flywheel-label flywheel-label-5">Land Group Deal</div>
+                </div>
+
+                <!-- Steps Detail -->
+                <div>
+                    <ul class="flywheel-steps">
+                        <li class="flywheel-step">
+                            <div class="flywheel-step-num">1</div>
+                            <div>
+                                <h4>Lead with Risk</h4>
+                                <div class="step-tag">The opening play</div>
+                                <p>Anthropic's safety-first ethos directly aligns with Macquarie's group-wide risk posture. Lead every conversation with how interpretable, auditable AI protects them from reputational and regulatory risk &mdash; not with product features.</p>
+                            </div>
+                        </li>
+                        <li class="flywheel-step">
+                            <div class="flywheel-step-num">2</div>
+                            <div>
+                                <h4>Leverage Existing Network</h4>
+                                <div class="step-tag">Fast entry, warm introductions</div>
+                                <p>Use personal AWS and GCP partner network to facilitate introductions into CGM and BFS. Understand company politics, divisional goals and budget cycles before the first meeting.</p>
+                            </div>
+                        </li>
+                        <li class="flywheel-step">
+                            <div class="flywheel-step-num">3</div>
+                            <div>
+                                <h4>Land with Technology</h4>
+                                <div class="step-tag">Least resistance, fastest adoption</div>
+                                <p>Open doors through engineering stakeholders &mdash; the cohort most familiar with AI tooling and least resistant to change. Claude Code into large tech teams is the beachhead.</p>
+                            </div>
+                        </li>
+                        <li class="flywheel-step">
+                            <div class="flywheel-step-num">4</div>
+                            <div>
+                                <h4>Lean into the Business</h4>
+                                <div class="step-tag">Expand from tech into operations</div>
+                                <p>Once trust is established within technology teams, expand Claude use into business functions: employee productivity, client experience, financial research and risk reporting.</p>
+                            </div>
+                        </li>
+                        <li class="flywheel-step">
+                            <div class="flywheel-step-num">5</div>
+                            <div>
+                                <h4>Land Group-Wide Deal</h4>
+                                <div class="step-tag">The definitive outcome</div>
+                                <p>Consolidate divisional wins into a single Macquarie Group enterprise agreement. Leverage globally renowned logo for future FSI engagements. Secure long-term recurring revenue.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Outreach Phases -->
+            <div class="animate-on-scroll">
+                <h3 style="font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px;">Outreach Phases</h3>
+                <p style="font-size: 15px; color: rgba(255,255,255,0.45); font-style: italic; margin-bottom: 8px;">Executing the strategy through structured, phased engagement.</p>
+            </div>
+
+            <div class="phases-grid animate-on-scroll">
+                <div class="phase-card">
+                    <div class="phase-num">1a</div>
+                    <div class="phase-title">Claude Code Beachhead</div>
+                    <div class="phase-desc">Leverage engineering teams' familiarity with AI coding tools. Validate if Macquarie already accesses Claude via hyperscalers. Claude Code into 6,000+ technologists is the fastest entry.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">1b</div>
+                    <div class="phase-title">API + Enterprise Expansion</div>
+                    <div class="phase-desc">Expand outreach for MAM and Capital beyond Claude Code to API and Enterprise for employee productivity and customer experience automation.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">2</div>
+                    <div class="phase-title">Deepen Relationships</div>
+                    <div class="phase-desc">Deliver against success criteria, drive awareness and adoption within each operating group. Let outcomes tell the story.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">3</div>
+                    <div class="phase-title">Multi-Threaded Prospecting</div>
+                    <div class="phase-desc">Launch new outreach into other MQG divisions and at the Group level. Each operating group has their own decision-making power and budgets.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">4</div>
+                    <div class="phase-title">Executive Connections</div>
+                    <div class="phase-desc">Leverage Anthropic's Senior Leaders for executive-to-executive connections. A US-based leader flying 15 hours signals genuine commitment.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">5</div>
+                    <div class="phase-title">Champion Development</div>
+                    <div class="phase-desc">Develop internal champions within customer segments with highest adoption. Champions are the most credible sales assets.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">6</div>
+                    <div class="phase-title">ROI Proposal &amp; Demo Cycle</div>
+                    <div class="phase-desc">Collaborate with key stakeholders on a formal ROI Proposal. Conduct sales cycles, lunch &amp; learns and demos across every Operating Group.</div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-num">7</div>
+                    <div class="phase-title">Close &mdash; Group-Wide Deal</div>
+                    <div class="phase-desc">Align with Economic Buyer(s) and champions on commercials, legal and board sign-off. The outcome: Anthropic's flagship APAC logo.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stakeholders -->
+    <section class="section stakeholder-section">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Macquarie Stakeholders</div>
+                <h2 class="section-title">Key Decision Makers</h2>
+                <p class="section-subtitle">A mapped organisational hierarchy identifying the critical stakeholders for Anthropic's engagement at Macquarie Group.</p>
+            </div>
+
+            <div class="stakeholder-org animate-on-scroll">
+                <!-- CEO Tier -->
+                <div class="stakeholder-tier">
+                    <a href="https://www.macquarie.com/au/en/about/company/executive-committee.html" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card ceo">
+                            <div class="name">Shemara Wikramanayake</div>
+                            <div class="role">Group Managing Director & CEO</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="stakeholder-connector"><div class="line"></div></div>
+                <!-- C-Suite Tier -->
+                <div class="stakeholder-tier">
+                    <a href="https://au.linkedin.com/in/justin-raoul-moffitt-26237322a" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card exec">
+                            <div class="name">Justin Moffitt</div>
+                            <div class="role">Group CIO</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/pierluigiculazzo/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card exec">
+                            <div class="name">Pier Luigi Culazzo</div>
+                            <div class="role">Global CDO & AI Officer</div>
+                        </div>
+                    </a>
+                    <a href="https://www.macquarie.com/au/en/about/company/executive-committee.html" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card exec">
+                            <div class="name">Nicole Sorbara</div>
+                            <div class="role">Group COO</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/robertkliman/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card exec">
+                            <div class="name">Robert Kliman</div>
+                            <div class="role">Global Head of Risk Technology</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="stakeholder-connector"><div class="line"></div></div>
+                <!-- VP Tier -->
+                <div class="stakeholder-tier">
+                    <a href="https://www.linkedin.com/in/phlittle/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Philip Little</div>
+                            <div class="role">CIO, Enterprise Technology</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mellisau/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Matthew Ellis</div>
+                            <div class="role">Chief Digital Officer</div>
+                        </div>
+                    </a>
+                    <a href="https://au.linkedin.com/in/ashwinsinha22" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Ashwin Sinha</div>
+                            <div class="role">Chief Digital, Data & AI Officer</div>
+                        </div>
+                    </a>
+                    <a href="https://uk.linkedin.com/in/james-dyckhoff-452459103" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">James Dyckhoff</div>
+                            <div class="role">COO, Macquarie Asset Management</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="stakeholder-connector"><div class="line"></div></div>
+                <!-- Director Tier -->
+                <div class="stakeholder-tier">
+                    <a href="https://au.linkedin.com/in/rheeley" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Richard Heeley</div>
+                            <div class="role">Head of Tech, BFS</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/marcuswhitworth/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Marcus Whitworth</div>
+                            <div class="role">Data & IT Architecture</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abhishektoraskar/" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Abhi Toraskar</div>
+                            <div class="role">Head of Data</div>
+                        </div>
+                    </a>
+                    <a href="https://au.linkedin.com/in/tim-fleming-1655243b" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Tim Fleming</div>
+                            <div class="role">Safety Director</div>
+                        </div>
+                    </a>
+                    <a href="https://au.linkedin.com/in/pete-sharp-561b6a13" target="_blank" class="stakeholder-link">
+                        <div class="stakeholder-card">
+                            <div class="name">Peter Sharp</div>
+                            <div class="role">Head of Technology Risk</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Asks & Investment -->
+    <section class="section asks-section">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <div class="section-label">Investment Required</div>
+                <h2 class="section-title">Asks of Leadership</h2>
+            </div>
+
+            <div class="asks-layout animate-on-scroll">
+                <div>
+                    <div class="ask-card">
+                        <div class="ask-num">1</div>
+                        <div class="ask-content">
+                            <h4>$150K Professional Services Fund</h4>
+                            <p>Accelerate deployment and integration of initial use cases at flagship accounts. Reduces time-to-value for first enterprise wins.</p>
+                        </div>
+                    </div>
+                    <div class="ask-card">
+                        <div class="ask-num">2</div>
+                        <div class="ask-content">
+                            <h4>Quarterly Senior Executive Visits</h4>
+                            <p>AU buyers respond strongly to US leadership investment. A 15-hour flight signals genuine commitment &mdash; a needle mover for C-suite decisions.</p>
+                        </div>
+                    </div>
+                    <div class="ask-card">
+                        <div class="ask-num">3</div>
+                        <div class="ask-content">
+                            <h4>Executive Briefing, San Francisco HQ</h4>
+                            <p>Invite Macquarie and CSL C-suite to SF for a global thought leadership experience. Creates executive champions before commercial discussions.</p>
+                        </div>
+                    </div>
+                    <div class="ask-card">
+                        <div class="ask-num">4</div>
+                        <div class="ask-content">
+                            <h4>Event Marketing Sponsorship</h4>
+                            <p>Booth presence at AWS Summit, Google Cloud Summit and AFR AI Live Summit. Essential for brand building and warm pipeline generation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="investment-case">
+                    <h3>The Investment Case</h3>
+                    <ul>
+                        <li>Australia's top 3 verticals &mdash; FSI, Mining and Health & Life Sciences &mdash; are natural enterprise buyers of safety-first AI.</li>
+                        <li>Claude's differentiation (safety, interpretability, steerability) maps directly to regulatory requirements competitors cannot match.</li>
+                        <li>Macquarie alone represents $5&ndash;10M ARR with significant upsell potential across 4 operating groups with independent budgets.</li>
+                        <li>Claude Code into 6,000+ Macquarie engineers is an immediate, measurable productivity win &mdash; the fastest path to land.</li>
+                        <li>Multi-cloud deployment via Bedrock (CGM/AWS) and Vertex AI (BFS/GCP) removes the single largest enterprise procurement barrier.</li>
+                        <li>With investment in tooling, marketing and PS funding, Macquarie has the potential to be Anthropic's largest APAC revenue generator.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <h2>Let's Build Anthropic's<br>Australian Story Together</h2>
+                <p>I've mapped the market, identified the verticals, planned the accounts and built the strategy. Now I'd like to execute it &mdash; as part of the Anthropic team.</p>
+                <div class="cta-buttons">
+                    <a href="https://www.linkedin.com/in/james-rogers-9ab99951/" class="btn btn-primary" target="_blank">Get in Touch &rarr;</a>
+                    <a href="https://www.linkedin.com/in/james-rogers-9ab99951/" class="btn btn-outline" target="_blank">LinkedIn Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Confidential &middot; James Rogers &middot; February 2026 &middot; Enterprise Industries Generalist Assignment Review</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
